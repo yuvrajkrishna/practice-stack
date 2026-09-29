@@ -1,6 +1,6 @@
 import java.util.Stack;
 
-public class prefixtoinfix {
+public class postfixtoinfix {
 
     public static boolean operator(char ch) {
         if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
@@ -11,17 +11,13 @@ public class prefixtoinfix {
 
     public static void main(String[] args) {
 
-        String str = "- + a b * c d";
+        String str = "ab+cd*-";
 
         Stack<String> stack = new Stack<>();
 
-        for (int i = str.length() - 1; i >= 0; i--) {
+        for (int i = 0; i < str.length(); i++) {
 
             char ch = str.charAt(i);
-
-            if (ch == ' ') {
-                continue;
-            }
 
             if (Character.isAlphabetic(ch)) {
                 stack.push(String.valueOf(ch));
@@ -29,8 +25,8 @@ public class prefixtoinfix {
 
             else if (operator(ch)) {
 
-                String operand1 = stack.pop();
                 String operand2 = stack.pop();
+                String operand1 = stack.pop();
 
                 String ans = "(" + operand1 + ch + operand2 + ")";
 
